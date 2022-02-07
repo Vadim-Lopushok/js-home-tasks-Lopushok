@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task2</title>
+  </head>
+  <body>
+    <script>
+        do { 
+          var firstName = prompt('Введите вашe имя:', '');
+          if (!firstName) {
+            confirm('Имя должно быть обязательно указано!')
+          }
+        } while (!firstName);
+        var secondName = prompt('Введите ваше отчество:', '');
+        var lastName = prompt('Введите вашу фамилию:', '');
+        var fullYears = parseInt(prompt('Сколько вам лет:', ''), 10);
+        var gender = confirm('Ваш пол - мужской?');
+        var pension = false;
+
+        if (gender && (fullYears >= 65)) {
+            pension = true;
+        } else if (!gender && (fullYears >= 60)) {
+            pension = true;
+        }
+
+        var fullName = firstName + ' ' + secondName + ' ' + lastName;
+        var ageInDays = Math.floor(fullYears * 365.2425);
+        var futureYears = fullYears + 5;
+
+        gender = (gender) ? 'мужской' : 'женский';
+        pension = (pension) ? 'да' : 'нет';
+
+        var finalMessage = 'ваше ФИО: ' + fullName + '\n' +
+            'ваш возраст в годах: ' + fullYears + '\n' +
+            'ваш возраст в днях: ' + ageInDays + '\n' +
+            'через 5 лет вам будет: ' + futureYears + '\n' +
+            'ваш пол: ' + gender + '\n' +
+            'вы на пенсии: ' + pension;
+
+        alert(finalMessage);
+    </script>
+  </body>
+</html>
