@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>task1</title>
+  </head>
+  <body>
+    <script>
+      /* Version 1 */
+      function vowels(str) {
+        var count = 0;
+        var string = str.toLowerCase().split('');
+        function searchVowels(array) {
+          var listVowels = ['а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я'];
+          if (listVowels.indexOf(array) != -1) {
+            count++;
+          }
+        }
+        string.forEach(searchVowels);
+        return count;
+      }
+      alert(
+        'В строке гласных букв: ' +
+        vowels(prompt('Введите слово: '))
+      );
+
+      /* Version 2 */
+      function numberOfVowels() {
+      var count = 0;
+      var vowels = ['а', 'е', 'ё', 'и', 'о', 'у', 'ы', 'э', 'ю', 'я'];
+      var message = prompt('Введите слово', '');
+      message = message.toLowerCase().split('');
+      for (var letter of message) {
+        if (vowels.includes(letter)) {
+          count += 1;
+        }
+      }
+      return count;
+    }
+    console.log('Количество гласных букв в строке: ' + numberOfVowels());
+    </script>
+  </body>
+</html>
