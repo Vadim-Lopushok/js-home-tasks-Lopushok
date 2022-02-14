@@ -8,19 +8,22 @@
   </head>
   <body>
     <script>
-      var numbers = [];
-      while (true) {
-        var value = parseInt(prompt('Введите число для подсчёта', ''));
+      var numbers = []; 
+      do { (value = parseInt(prompt('Введите число для подсчёта', ''))) 
         if (value === '' || value === null || isNaN(value)) break;
         numbers.push(parseInt(value));
-      }
+      } while (typeof value=="number");
 
       var result = 0;
       for (var number of numbers) {
         result += number;
       }
 
-      alert(result);
+      if(numbers.length === 0) {
+        alert('Вы не ввели числа')
+      } else {
+        alert('Сумма введённых чисел: ' + result);
+      }
     </script>
   </body>
 </html>
