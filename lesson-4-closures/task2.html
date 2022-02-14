@@ -14,14 +14,15 @@
         className: 'open menu',
       };
       function removeClass(obj, cls) {
-        var newArr = obj.className ? obj.className.split(' ') : [];
-        for (var i = 0; i < newArr.length; i++) {
-          if (newArr[i] == cls) {
-            newArr.splice(i, 1);
+        var newClasses = obj.className ? obj.className.split(' ') : [];
+        
+        for (var i = 0; i < newClasses.length; i++) {
+          if (newClasses[i] == cls) {
+            newClasses.splice(i, 1);
             i--;
           }
         }
-        obj.className = newArr.join(' ');
+        obj.className = newClasses.join(' ');
       }
     </script>
   </body>
