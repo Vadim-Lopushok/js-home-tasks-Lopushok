@@ -10,9 +10,9 @@
     <script>
       var numbers = []; 
       do { (value = parseInt(prompt('Введите число для подсчёта', ''))) 
-        if (value === '' || value === null || isNaN(value)) break;
+        if (value === '' || value === null || !isFinite(value)) break;
         numbers.push(parseInt(value));
-      } while (typeof value=="number");
+      } while (!isNaN(value));
 
       var result = 0;
       for (var number of numbers) {
