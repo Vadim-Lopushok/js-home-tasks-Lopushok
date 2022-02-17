@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task2</title>
+  </head>
+  <body>
+    <script>
+      'use strict';
+
+      var obj = {
+        className: 'open menu',
+      };
+      function removeClass(obj, cls) {
+        var newClasses = obj.className ? obj.className.split(' ') : [];
+        
+        for (var i = 0; i < newClasses.length; i++) {
+          if (newClasses[i] == cls) {
+            newClasses.splice(i, 1);
+            i--;
+          }
+        }
+        obj.className = newClasses.join(' ');
+      }
+    </script>
+  </body>
+</html>
