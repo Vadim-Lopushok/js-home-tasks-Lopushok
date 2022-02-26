@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>task3</title>
+  </head>
+  <body>
+    <script>
+      var numbers = []; 
+      do { 
+        (value = parseInt(prompt('Введите число для подсчёта', ''))); 
+        if (value === '' || value === null || !isFinite(value)) break;
+        numbers.push(parseInt(value));
+      } while (!isNaN(value));
+
+      var result = 0;
+      for (var number of numbers) {
+        result += number;
+      }
+
+      if(numbers.length === 0) {
+        alert('Вы не ввели числа')
+      } else {
+        alert('Сумма введённых чисел: ' + result);
+      }
+
+      /* version 2*/
+
+      var numbers = [];
+      do {
+        value = prompt('Введите число для подсчёта', '');
+        numbers.push(+value);
+      } 
+      while (value !== null && value !== '' && (!isNaN(value)));
+      numbers.pop() /*чтобы не внести в массив прерывающий элемент*/;
+      
+      var result = 0;
+      for(var i = 0; i < numbers.length; i++) {
+        result += numbers[i];
+      }
+      
+      if(numbers.length === 0) {
+        alert('Вы не ввели числа')
+      } else {
+        alert('Сумма введённых чисел: ' + result);
+      }
+
+
+      /* version 3 with one cycle */
+
+      var numbers = [];
+      var result = 0;
+
+      for(var i = 0; i <= numbers.length; i++) {
+      var value = prompt('Введите число для подсчёта', '');
+      
+      if(value !== null && value !== '' && !isNaN(value)) {
+        numbers.push(+value);
+        result += numbers[i];
+      }
+      else {
+        break;
+      }
+    }
+
+      if(numbers.length === 0) {
+        alert('Вы не ввели числа')
+      } else {
+        alert('Сумма введённых чисел: ' + result);
+      }
+
+      /* version 4 */
+      var numbers = [];
+      for (var value = parseInt(prompt('Введите число для подсчёта', '')); !isNaN(value);) {
+	      numbers.push(value);
+	      value = parseInt(prompt('Введите число для подсчёта', ''));
+      }
+
+      var result = 0;
+      for (var i = 0; i < numbers.length; i++) {
+	      result += numbers[i];
+      }
+
+      if(numbers.length === 0) {
+        alert('Вы не ввели числа')
+      } else {
+        alert('Сумма введённых чисел: ' + result);
+      }
+    </script>
+  </body>
+</html>
