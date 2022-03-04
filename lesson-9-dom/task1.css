@@ -1,0 +1,25 @@
+body {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+}
+
+button {
+  padding: 20px;
+  margin: 20px;
+  width: 20%;
+  cursor: pointer;
+}
+
+.list {
+  margin: 0 auto;
+  padding: 30px;
+  margin-bottom: 50px;
+  width: 500px;
+  height: 500px;
+  border: 5px solid black;
+  background-color: lightgrey;
+  font-size: 22px;
+}
