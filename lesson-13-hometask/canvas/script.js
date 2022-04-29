@@ -1,38 +1,41 @@
 'use strict';
 
-var canvasElem = document.createElement('canvas');
-canvasElem.width = 500;
-canvasElem.height = 500;
-document.body.appendChild(canvasElem);
+const canvasElem = document.getElementById('canvas-clock');
+const ctx = canvasElem.getContext('2d');
+let radius = canvasElem.height / 2;
+let clockX = canvasElem.width / 2;
+let clockY = canvasElem.height / 2;
+let clockWidth = canvasElem.width;
+let clockHeight = canvasElem.height;
+let clockRadius = canvasElem.width / 2 - 5;
 
-canvasElem.id = 'clock';
+setInterval(drawClock, 1000);
 
-function createCanvasClock() {
-  var clock = document.getElementById('clock');
-  var ctx = clock.getContext('2d');
+function drawClock() {
+  drawFace(ctx, radius);
+  drawNumbers(ctx, radius);
+  drawTime(ctx, radius);
+  handHour();
+  handMinute();
+  handSecond();
+  drawCentre();
+}
 
-  var clockWidth = clock.width;
-  var clockHeight = clock.height;
-  var clockRadius = clock.width / 2 - 5;
-  var clockX = clock.width / 2;
-  var clockY = clock.height / 2;
-
-  ctx.fillStyle = '#ffffff';
-  ctx.fillRect(0,0,clock.width,clock.height);
-
-  // Циферблат
+function drawFace() {
   ctx.beginPath();
-  ctx.strokeStyle = 'black';
-  ctx.fillStyle = 'yellow';
-  ctx.lineWidth = 3;
   ctx.arc(clockX, clockY, clockRadius, 0, 2 * Math.PI, false);
-  ctx.moveTo(clockX,clockY)
-  ctx.stroke();
   ctx.fill();
+  ctx.fillStyle = 'yellow';
+  ctx.moveTo(clockX,clockY)
+  ctx.strokeStyle = 'black';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  ctx.fillRect(0,0,clockWidth,clockHeight);
   ctx.closePath();
+}
 
+function drawNumbers() {
   for(var i = 1; i <= 12; i++) {
-
     var angle = parseFloat(i*30)/180*Math.PI;
     var numX = clockX+(clockRadius-clockWidth/10)*Math.sin(angle);
     var numY = clockY-(clockRadius-clockWidth/10)*Math.cos(angle);
@@ -49,9 +52,7 @@ function createCanvasClock() {
     ctx.closePath();
   }
 
-  // Цифры на циферблате
   for(var i = 1; i <= 12; i++) {
-
     var angle = parseFloat(i*30)/180*Math.PI;
     var textX = clockX+(clockRadius-clockWidth/10)*Math.sin(angle);
     var textY = clockY-(clockRadius-clockWidth/10)*Math.cos(angle);
@@ -67,20 +68,13 @@ function createCanvasClock() {
     }
     ctx.closePath();
   }
+  }
 
-  // Время и угол наклона стрелок
-  var time = new Date();
-
-  var angleHour = (time.getHours()%12)/12*360+time.getMinutes()/60*30;
-  var angleMin = time.getMinutes()/60*360;
-  var angleSec = time.getSeconds()/60*360;
-
-  // Рисуем стрелки
-  var secLength = clockRadius - clockRadius/5.5;
-  var minLength = clockRadius - clockRadius/2.8;
-  var hourLength = minLength / 1.25;
-
-  // Рисуем часовую стрелку
+function handHour() {
+  let time = new Date();
+  let angleHour = (time.getHours()%12)/12*360+time.getMinutes()/60*30;
+  let minLength = clockRadius - clockRadius/2.8;
+  let hourLength = minLength / 1.25;
   ctx.beginPath();
   ctx.lineWidth = 6;
   ctx.moveTo(clockX, clockY);
@@ -88,8 +82,12 @@ function createCanvasClock() {
     clockY - hourLength*Math.sin(Math.PI/2 -angleHour*(Math.PI/180)));
   ctx.stroke();
   ctx.closePath();
+} // часовая стрелка
 
-  // Рисуем минутную стрелку
+function handMinute() {
+  let time = new Date();
+  var angleMin = time.getMinutes()/60*360;
+  var minLength = clockRadius - clockRadius/2.8;
   ctx.beginPath();
   ctx.lineWidth = 5;
   ctx.strokeStyle = 'blue';
@@ -98,8 +96,12 @@ function createCanvasClock() {
     clockY - minLength*Math.sin(Math.PI/2 -angleMin*(Math.PI/180)));
   ctx.stroke();
   ctx.closePath();
+}  // минутная стрелка
 
-  // Рисуем секундную стрелку
+function handSecond() {
+  let time = new Date();
+  var secLength = clockRadius - clockRadius/5.5;
+  var angleSec = time.getSeconds()/60*360;
   ctx.beginPath();
   ctx.lineWidth = 3;
   ctx.strokeStyle = 'red';
@@ -108,8 +110,9 @@ function createCanvasClock() {
     clockY - secLength*Math.sin(Math.PI/2 - angleSec*(Math.PI/180)));
   ctx.stroke();
   ctx.closePath();
+}   // секундная стрелка
 
-  // Рисуем центр
+function drawCentre() {
   ctx.beginPath();
   ctx.strokeStyle = 'black';
   ctx.fillStyle = 'lightblue';
@@ -120,18 +123,14 @@ function createCanvasClock() {
   ctx.fill();
   ctx.closePath();
 
-  // Добавляем часы
+} // точка в центре часов
+
+function drawTime() {
+  let time = new Date();
+
   ctx.beginPath();
   ctx.fillStyle='black';
   ctx.fillText(time.toLocaleTimeString(), clockX-clockWidth/6, clockY-clockHeight/6);
-  ctx.font='italic normal '+textSize+' Arial';
+  ctx.font='italic normal '+' Arial';
   ctx.closePath();
-}
-
-// Запускаем часы
-setTimeout(function run(){
-  var time = new Date();
-  var mSec = time.getMilliseconds()
-  createCanvasClock();
-  setTimeout(run,1000-mSec+20);
-}, 20);
+  } // часы
